@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
@@ -7,9 +8,11 @@ import java.util.Set;
 
 public class Graph {
     private Map<String, List<Edge>> graph;
+    Map<String, Point> cityCoordinates;
 
     public Graph() {
         graph = new HashMap<>();
+        cityCoordinates = new HashMap<>();
     }
 
     public void addEdge(String city1, String city2, int cost) {
@@ -23,6 +26,14 @@ public class Graph {
 
     public Set<String> getCities() {
         return graph.keySet();
+    }
+
+    public Point getCoordinates(String city) {
+        return cityCoordinates.get(city);
+    }
+
+    public void addCity(String city, int x, int y) {
+        cityCoordinates.put(city, new Point(x, y));
     }
 }
 

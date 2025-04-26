@@ -1,8 +1,47 @@
+import javax.swing.*;
 import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
         Graph graph = new Graph();
+
+
+        graph.addCity("vancouver", 97, 60);
+        graph.addCity("seattle", 95, 120);
+        graph.addCity("portland", 75, 185);
+        graph.addCity("sanfrancisco", 60, 405);
+        graph.addCity("losangeles", 140, 525);
+        graph.addCity("calgary", 227, 40);
+        graph.addCity("montreal", 910, 40);
+        graph.addCity("pittsburgh", 835, 235);
+        graph.addCity("miami", 915, 625);
+        graph.addCity("newyork", 915, 190);
+        graph.addCity("boston", 980, 105);
+        graph.addCity("lasvegas", 205, 460);
+        graph.addCity("chicago", 730, 260);
+        graph.addCity("saultstemarie", 665, 120);
+        graph.addCity("toronto", 780, 130);
+        graph.addCity("duluth", 535, 185);
+        graph.addCity("omaha", 545, 295);
+        graph.addCity("kansascity", 565, 355);
+        graph.addCity("oklahomacity", 545, 445);
+        graph.addCity("phoenix", 285, 515);
+        graph.addCity("elpaso", 390, 570);
+        graph.addCity("santafe", 390, 475);
+        graph.addCity("denver", 390, 370);
+        graph.addCity("dallas", 575, 555);
+        graph.addCity("houston", 610, 605);
+        graph.addCity("neworleans", 715, 590);
+        graph.addCity("littlerock", 640, 470);
+        graph.addCity("winnipeg", 465, 55);
+        graph.addCity("helena", 340, 190);
+        graph.addCity("saltlakecity", 260, 340);
+        graph.addCity("washington", 940, 295);
+        graph.addCity("raleigh", 910, 360);
+        graph.addCity("charleston", 915, 500);
+        graph.addCity("atlanta", 835, 475);
+        graph.addCity("nashville", 760, 425);
+        graph.addCity("saintlouis", 650, 385);
 
         graph.addEdge("vancouver", "calgary", 100);
         graph.addEdge("vancouver", "seattle", 45);
@@ -174,11 +213,8 @@ public class Main {
         graph.addEdge("saintlouis", "littlerock", 60);
         graph.addEdge("saintlouis", "nashville", 85);
 
-        Pair<List<String>, List<String>> result = Algorithms.ucs(graph, "losangeles", "miami");
-        List<String> path = result.getFirst();
-        List<String> orderVisited = result.getSecond();
 
-        System.out.println("Path found: " + path);
-        System.out.println("Order of cities visited: " + orderVisited);
+
+        MapVisualizer.createAndShowMap(graph);
     }
 }
