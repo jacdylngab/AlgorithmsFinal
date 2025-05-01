@@ -5,7 +5,7 @@ public class Algorithms {
     // the weight of the graph to get an optimal solution.
     // It starts exploring using the city that has the lowest edge-weight (cost).
 
-   public static Pair<List<String>, List<String>> ucs(Graph graph, String start, String goal) {
+   public static Pair<List<String>, List<String>> dijkstra(Graph graph, String start, String goal) {
        PriorityQueue<Node> pq = new PriorityQueue<>();
        pq.add(new Node(0, start, new ArrayList<>(List.of(start))));
        Set<String> visited = new HashSet<>();

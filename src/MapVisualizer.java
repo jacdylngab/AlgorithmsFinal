@@ -27,7 +27,7 @@ class MapPanel extends JPanel {
 
     public MapPanel(Graph graph) {
         this.graph = graph;
-        usMapImage = new ImageIcon("src/mmap.png").getImage();
+        usMapImage = new ImageIcon("src/map.png").getImage();
 
         addMouseListener(new MouseAdapter() {
             @Override
@@ -55,7 +55,7 @@ class MapPanel extends JPanel {
                 System.out.println("Goal city selected: " + goalCity);
 
 
-                Pair<List<String>, List<String>> result = Algorithms.ucs(graph, startCity, goalCity);
+                Pair<List<String>, List<String>> result = Algorithms.dijkstra(graph, startCity, goalCity);
                 if (result != null) {
                     List<String> path = result.getFirst();
                     List<String> orderVisited = result.getSecond();
@@ -86,8 +86,6 @@ class MapPanel extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        // Draw the US map background
-        g.drawImage(usMapImage, 0, 0, getWidth(), getHeight(), this);
 
         // Draw Edges
         g.setColor(Color.GRAY);
@@ -100,16 +98,23 @@ class MapPanel extends JPanel {
         }
 
         // Draw cities
-        g.setColor(Color.RED);
+        g.setColor(Color.GREEN);
+        //g.setColor(getBackground());
         for (Map.Entry<String, Point> entry : graph.cityCoordinates.entrySet()) {
             Point p = entry.getValue();
-            g.fillOval(p.x - 5, p.y - 5, 10, 10);
+            g.fillOval(p.x - 15, p.y - 15, 30, 30);
             g.drawString(entry.getKey(), p.x + 8, p.y);
         }
 
+        // Draw the US map background
+        g.drawImage(usMapImage, 0, 0, getWidth(), getHeight(), this);
+
         // Highlight the path
         if (pathToHighlight != null && pathToHighlight.size() >= 2) {
-            g.setColor(Color.BLUE);
+            Graphics g2 = (Graphics2D) g;
+            //g.setColor(Color.BLUE);
+            g2.setColor(new Color(255, 0,0));
+            ((Graphics2D) g2).setStroke(new BasicStroke(6));
             for (int i = 0; i < pathToHighlight.size() - 1; i++) {
                 Point from = graph.cityCoordinates.get(pathToHighlight.get(i));
                 Point to = graph.cityCoordinates.get(pathToHighlight.get(i+1));
@@ -117,15 +122,6 @@ class MapPanel extends JPanel {
             }
         }
 
-        // Highlight the path
-        if (orderVisited != null && orderVisited.size() >= 2) {
-            g.setColor(Color.YELLOW);
-            for (int i = 0; i < orderVisited.size() - 1; i++) {
-                Point from = graph.cityCoordinates.get(orderVisited.get(i));
-                Point to = graph.cityCoordinates.get(orderVisited.get(i+1));
-                g.drawLine(from.x, from.y, to.x, to.y);
-            }
-        }
     }
 
 }
